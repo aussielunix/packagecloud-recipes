@@ -4,3 +4,6 @@ deb:
   url: "https://cli.run.pivotal.io/stable?release=debian64&source=pws"
   sha256: "65773a4abc61e43f7031bbb3222bba0f4bf3912748245f35b701921165987b92"
   dest: "/tmp/cf-cli-installer_x86-64.deb"
+
+pc:
+  repo: "aussielunix/tools/ubuntu/14.04"

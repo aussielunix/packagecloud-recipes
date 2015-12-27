@@ -15,5 +15,5 @@
       register: result
 
     - name: upload deb to packagecloud.io
-      shell: "package_cloud push aussielunix/tools/ubuntu/14.04 {{ deb.dest }}"
+      command: "package_cloud push {{ pc.repo }} {{ deb.dest }}"
       when: result.changed
