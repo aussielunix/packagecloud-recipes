@@ -9,11 +9,11 @@
   tasks:
     - name: download x86_64 linux .deb
       get_url:
-        url={{ deb.url }}
-        sha256sum={{ deb.sha256 }}
-        dest={{ deb.dest }}
+        url={{ cfcli.url }}
+        sha256sum={{ cfcli.sha256 }}
+        dest={{ cfcli.dest }}
       register: result
 
     - name: upload deb to packagecloud.io
-      command: "package_cloud push {{ pc.repo }} {{ deb.dest }}"
+      command: "package_cloud push {{ packagecloud.repo }} {{ cfcli.dest }}"
       when: result.changed
