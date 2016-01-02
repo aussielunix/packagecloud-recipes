@@ -13,7 +13,7 @@
         dest="{{direnv.dest}}"
         version="v{{direnv.version}}"
 
-    - name: compile Linux and64 binary
+    - name: compile Linux amd64 binary
       command: gox -osarch='linux/amd64' -output 'dist/direnv_{{direnv.version}}-1_amd64'
       args:
         chdir: "{{direnv.dest}}"
