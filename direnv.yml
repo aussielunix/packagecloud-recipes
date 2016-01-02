@@ -1,0 +1,74 @@
+---
+
+- name: Build a static binary and upload it to packagecloud.io
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - settings.yml
+  tasks:
+    - name: get source from github
+      git: >
+        repo="{{direnv.repo}}"
+        dest="{{direnv.dest}}"
+        version="v{{direnv.version}}"
+
+    - name: compile Linux and64 binary
+      command: gox -osarch='linux/amd64' -output 'dist/direnv_{{direnv.version}}-1_amd64'
+      args:
+        chdir: "{{direnv.dest}}"
+        creates: 'dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64'
+      register: result
+
+    - name: prepare for packaging - create .deb dir structure
+      file: >
+        path="{{item}}"
+        state=directory
+        mode=0755
+      with_items:
+        - "{{direnv.dest}}/pkg/opt"
+        - "{{direnv.dest}}/pkg/usr/share/man/man1"
+        - "{{direnv.dest}}/pkg/usr/share/doc"
+
+    - name: prepare for packaging - copy files into place
+      copy: >
+        src="{{direnv.dest}}/dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64"
+        dest="{{direnv.dest}}/pkg/opt/direnv"
+        owner=lunix
+        group=lunix
+        mode=0755
+
+    - name: prepare for packaging - copy files into place
+      copy: >
+        src="{{direnv.dest}}/man/{{item}}"
+        dest="{{direnv.dest}}/pkg/usr/share/man/man1/{{item}}"
+        owner=lunix
+        group=lunix
+        mode=0644
+      with_items:
+        - direnv.1
+        - direnv-stdlib.1
+
+    - name: create .deb package
+      command: "fpm -s dir -t deb -n direnv -v '{{direnv.version}}' --iteration '{{direnv.release}}' -C pkg -p dist --category '{{direnv.category}}' --maintainer '{{direnv.maintainer}}' --vendor '{{direnv.maintainer}}' --description '{{direnv.description}}' --url '{{direnv.url}}'"
+      args:
+        chdir: "{{direnv.dest}}"
+        creates: "{{ direnv.dest }}/dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64.deb"
+      register: result
+
+    - uri: >
+        url="https://packagecloud.io/{{packagecloud.repo}}/packages/{{packagecloud.distro}}/direnv_{{direnv.version}}-{{direnv.release}}_amd64.deb"
+        method=HEAD
+        status_code=200,404
+        return_content=no
+        validate_certs=no
+      register: debexists
+
+    - name: yank package if rebuilding the exact same one (yolo)
+      command: "package_cloud yank {{packagecloud.repo}}/{{packagecloud.distro}} direnv_{{direnv.version}}-{{direnv.release}}_amd64.deb"
+      when: debexists.status == 200 and result|changed
+
+    - name: upload deb to packagecloud.io
+      command: "package_cloud push {{packagecloud.repo}}/{{packagecloud.distro}} {{ direnv.dest }}/dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64.deb"
+      when: result|changed
+
