@@ -15,5 +15,5 @@
       register: result
 
     - name: upload deb to packagecloud.io
-      command: "package_cloud push {{ packagecloud.repo }} {{ cfcli.dest }}"
-      when: result.changed
+      command: "package_cloud push {{ packagecloud.repo }}/{{packagecloud.distro}} {{ cfcli.dest }}"
+      when: result|changed
