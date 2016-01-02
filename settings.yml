@@ -1,7 +1,8 @@
 ---
 
 packagecloud:
-  repo: "aussielunix/tools/ubuntu/14.04"
+  repo: "aussielunix/tools"
+  distro: "ubuntu/trusty"
 
 cfcli:
   url: "https://cli.run.pivotal.io/stable?release=debian64&source=pws"
