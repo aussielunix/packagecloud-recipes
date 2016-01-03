@@ -5,7 +5,7 @@
   connection: local
   gather_facts: false
   vars_files:
-    - settings.yml
+    - ../settings.yml
   tasks:
     - name: download x86_64 linux .deb
       get_url:
