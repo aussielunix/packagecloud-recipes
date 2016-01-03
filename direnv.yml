@@ -12,6 +12,7 @@
         repo="{{direnv.repo}}"
         dest="{{direnv.dest}}"
         version="v{{direnv.version}}"
+
     - name: install mitchellh/gox to compile direnv
       command: go get github.com/mitchellh/gox
 
