@@ -9,6 +9,11 @@ cfcli:
   sha256: "65773a4abc61e43f7031bbb3222bba0f4bf3912748245f35b701921165987b92"
   dest: "/tmp/cf-cli-installer_x86-64.deb"
 
+slack:
+  url: 'https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.6-amd64.deb'
+  sha256: 'f7a10e7b565e2251f63bff879e9a31728af374c5e0aa36b577d3c542a3e25760'
+  dest: '/tmp/slack-desktop_amd64.deb'
+
 direnv:
   repo: "ssh://git@github.com/direnv/direnv.git"
   dest: "/tmp/direnv"
