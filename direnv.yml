@@ -12,6 +12,8 @@
         repo="{{direnv.repo}}"
         dest="{{direnv.dest}}"
         version="v{{direnv.version}}"
+    - name: install mitchellh/gox to compile direnv
+      command: go get github.com/mitchellh/gox
 
     - name: compile Linux amd64 binary
       command: gox -osarch='linux/amd64' -output 'dist/direnv_{{direnv.version}}-1_amd64'
@@ -26,16 +28,16 @@
         state=directory
         mode=0755
       with_items:
-        - "{{direnv.dest}}/pkg/opt"
+        - "{{direnv.dest}}/pkg/usr/bin"
         - "{{direnv.dest}}/pkg/usr/share/man/man1"
         - "{{direnv.dest}}/pkg/usr/share/doc"
 
     - name: prepare for packaging - copy files into place
       copy: >
         src="{{direnv.dest}}/dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64"
-        dest="{{direnv.dest}}/pkg/opt/direnv"
-        owner=lunix
-        group=lunix
+        dest="{{direnv.dest}}/pkg/usr/bin/direnv"
+        owner=root
+        group=root
         mode=0755
 
     - name: prepare for packaging - copy files into place
