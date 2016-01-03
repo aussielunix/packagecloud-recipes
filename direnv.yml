@@ -33,6 +33,7 @@
         - "{{direnv.dest}}/pkg/usr/share/doc"
 
     - name: prepare for packaging - copy files into place
+      sudo: yes
       copy: >
         src="{{direnv.dest}}/dist/direnv_{{direnv.version}}-{{direnv.release}}_amd64"
         dest="{{direnv.dest}}/pkg/usr/bin/direnv"
