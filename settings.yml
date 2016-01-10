@@ -9,6 +9,11 @@ cfcli:
   sha256: "65773a4abc61e43f7031bbb3222bba0f4bf3912748245f35b701921165987b92"
   dest: "/tmp/cf-cli-installer_x86-64.deb"
 
+dropbox:
+  url: "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+  sha256: "f9780cce3725ee307cdad8a835300e89483504059d302b3c6f91fe5cac0a5411"
+  dest: "/tmp/dropbox-installer_x86-64.deb"
+
 keybase:
   url: "https://dist.keybase.io/linux/deb/keybase-latest-amd64.deb"
   sha256: "cf5e57210a1751c07cb9ca713ca33197d81b462ba8f94076d85e1eeb311e263d"
