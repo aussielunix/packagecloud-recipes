@@ -2,11 +2,11 @@
 
 packagecloud:
   repo: "aussielunix/tools"
-  distro: "ubuntu/trusty"
+  distro: "ubuntu/xenial"
 
 cfcli:
   url: "https://cli.run.pivotal.io/stable?release=debian64&source=pws"
-  sha256: "65773a4abc61e43f7031bbb3222bba0f4bf3912748245f35b701921165987b92"
+  sha256: "1c0aaa839b2613dcebb0b94e147510489a819e470f47ea2fdb131aa35d70ee10"
   dest: "/tmp/cf-cli-installer_x86-64.deb"
 
 dropbox:
@@ -16,12 +16,12 @@ dropbox:
 
 keybase:
   url: "https://dist.keybase.io/linux/deb/keybase-latest-amd64.deb"
-  sha256: "cf5e57210a1751c07cb9ca713ca33197d81b462ba8f94076d85e1eeb311e263d"
+  sha256: "f17c08051715726b6ca95d11278d987b4c0732af02e4477dd2ef41236db625f1"
   dest: "/tmp/keybase-latest-amd64.deb"
 
 slack:
-  url: 'https://slack-ssb-updates.global.ssl.fastly.net/linux_releases/slack-desktop-1.2.6-amd64.deb'
-  sha256: 'f7a10e7b565e2251f63bff879e9a31728af374c5e0aa36b577d3c542a3e25760'
+  url: 'https://downloads.slack-edge.com/linux_releases/slack-desktop-2.2.1-amd64.deb'
+  sha256: '4de55687aeb2e87dde60f3f76fdc8b48457c7417e268112f1d9b52ab665d08f4'
   dest: '/tmp/slack-desktop_amd64.deb'
 
 direnv:
