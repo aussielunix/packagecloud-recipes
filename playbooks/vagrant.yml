@@ -1,0 +1,19 @@
+---
+
+- name: Grab the vagrant deb and upload it to packagecloud.io
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../settings.yml
+  tasks:
+    - name: download x86_64 linux .deb
+      get_url:
+        url={{ vagrant.url }}
+        sha256sum={{ vagrant.sha256 }}
+        dest={{ vagrant.dest }}
+      register: result
+
+    - name: upload deb to packagecloud.io
+      command: "package_cloud push {{ packagecloud.repo }}/{{packagecloud.distro}} {{ vagrant.dest }}"
+      when: result|changed

@@ -33,3 +33,8 @@ direnv:
   maintainer: "aussielunix"
   description: "Unclutter your .profile"
   url: "http://direnv.net"
+
+vagrant:
+  url: "https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6_x86_64.deb"
+  sha256: "e6d83b6b43ad16475cb5cfcabe7dc798002147c1d048a7b6178032084c7070da"
+  dest: "/tmp/vagrant_1.8.6_x86_64.deb"
