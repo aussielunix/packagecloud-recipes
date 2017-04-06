@@ -6,7 +6,7 @@ packagecloud:
 
 cfcli:
   url: "https://cli.run.pivotal.io/stable?release=debian64&source=pws"
-  sha256: "1c0aaa839b2613dcebb0b94e147510489a819e470f47ea2fdb131aa35d70ee10"
+  sha256: "4988788b4b4119688677e2ae9d5753f3b57d23889eb71daddb7d7ce9a7fac364."
   dest: "/tmp/cf-cli-installer_x86-64.deb"
 
 dropbox:
